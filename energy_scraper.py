@@ -17,11 +17,11 @@ class EnergyScraper:
     def scrape_data(self):
         self.headers = []
         soup = self.fetch_soup()
-        self.table_headers = soup.find("div",{"class":"table-container"})
-        self.table_values = soup.find("table",{"id":"DataTables_Table_2"})
+        self.table = soup.find("div",{"class":"table-container"})
+        
 
     def get_headers(self):
-        headers = self.table_headers.find_all('th',{'class':"dv-header-right full-border vertical-center"})
+        headers = self.table.find_all('th',{'class':"dv-header-right full-border vertical-center"})
         for i in headers:
             self.headers.append(i.find('span').text.replace('\n',''))
         for i in range(len(self.headers)):
@@ -33,7 +33,7 @@ class EnergyScraper:
     def get_data(self):
         temp = []
         self.data = []
-        data = self.table_values.find('tbody')
+        data = self.table.find_all('div')
         print(data)
 
 
