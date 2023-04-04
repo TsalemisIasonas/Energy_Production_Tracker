@@ -1,8 +1,6 @@
 import requests
 import datetime
 import re
-import csv
-import os
 from bs4 import BeautifulSoup
 
 
@@ -18,9 +16,8 @@ class EnergyScraper:
         part3 = 'productionType.values=B01&productionType.values=B02&productionType.values=B03&productionType.values=B04&productionType.values=B05&productionType.values=B06&productionType.values=B07&productionType.values=B08&productionType.values=B09&productionType.values=B10&productionType.values=B11&productionType.values=B12&productionType.values=B13&productionType.values=B14&productionType.values=B20&productionType.values=B15&productionType.values=B16&productionType.values=B17&productionType.values=B18&productionType.values=B19&dateTime.timezone=CET_CEST&dateTime.timezone_input=CET+(UTC+1)+/+CEST+(UTC+2)'
         self.url = part1+part2+part3
 
-        self.energy_data = {}
         self.scrape_data()
-
+  
     def fetch_soup(self):
         response = requests.get(self.url)
         soup = BeautifulSoup(response.content, 'html.parser')
@@ -43,9 +40,6 @@ class EnergyScraper:
             item = re.findall('[A-Z][a-z]*', item)
             self.headers.append(" ".join(item))
         del temp    ## free memory
-        print(self.headers)
-        # self.energy_data = {key: "" for key in self.headers}
-        # print(self.energy_data)
 
     def get_data(self):
         temp = []
@@ -68,17 +62,25 @@ class EnergyScraper:
 
         del temp    ## free memory
 
-    def organize_values(self):
+    def organize_data(self):
         temp = []
         for i in self.data:
             temp.append(i)
         self.data = []
-        
-        
+        for i in range(len(self.headers)):
+            group = temp[i::len(self.headers)]      ## get every nth element, where n is the number of categories
+            for j in range(len(group)):
+                if group[j] == '-' or group[j] == 'N/A' or group[j] == 'n/e':       ## clean data values, make numeric
+                    group[j] = 0
+            self.data.append(group)
+        del temp                        ## free memory
+
+    def create_dictionary(self):
+        self.get_headers()
+        self.get_data()
+        self.organize_data()
+        self.energy_data = {self.headers[i]: self.data[i] for i in range(len(self.headers))}
+        return self.energy_data
+    
 
 
-if __name__ == '__main__':
-    scraper = EnergyScraper()
-    scraper.get_headers()
-    scraper.get_data()
-    scraper.organize_values()
