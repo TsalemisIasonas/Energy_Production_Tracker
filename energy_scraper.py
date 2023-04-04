@@ -48,8 +48,13 @@ class EnergyScraper:
     def get_data(self):
         temp = []
         self.data = []
-        data = self.table.find_all('div')
-        print(data)
+        # data = self.table.find_all('div',{'class':'dataTables_wrapper'},{'role':'grid'})
+        data = self.table.find_all('span')
+        data = data[len(self.headers)+2:]
+        for i in data:
+            temp.append(i.text)
+        for i in temp:
+            print(i)
 
 
 
