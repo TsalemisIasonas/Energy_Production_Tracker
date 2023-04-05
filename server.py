@@ -1,13 +1,15 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from energy_scraper import EnergyScraper
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/data')
 def get_data():
     scraper = EnergyScraper()
-    data = scraper.scrape_data()
+    data = scraper.create_dictionary()
     return jsonify(data)
 
 
