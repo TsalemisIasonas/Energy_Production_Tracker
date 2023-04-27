@@ -6,12 +6,13 @@
   --light-bg-fg:black;
 }
 
-body {
+html,body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--dark-bg);
   color: var(--dark-bg-fg);
+  height: 100%;
 }
 
 .main-header {
@@ -34,6 +35,7 @@ body {
 }
 
 canvas {
+  background-color: var(--light-bg);
   display: block;
   margin: 0 auto;
 }
@@ -46,4 +48,15 @@ canvas {
   height: 50px;
   background-color: transparent;
   border: 1px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.light-theme-icon {
+  color: white;
+}
+
+.dark-theme-icon {
+  color: black;
 }

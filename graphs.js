@@ -1,3 +1,6 @@
+themeToggle = document.querySelector('.theme-toggle-button');
+themeToggle.addEventListener('click', themeToggler);
+
 fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data => {
     const xAxis = [];
     const yAxis = [];
@@ -39,3 +42,15 @@ fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data 
       }
     });
   });
+
+function themeToggler() {
+  console.log('add');
+  if (themeToggle.classList.contains('dark-theme-icon')) {
+    themeToggle.classList.remove('dark-theme-icon');
+    themeToggle.classList.add('light-theme-icon');
+  }
+  else {
+    themeToggle.classList.remove('light-theme-icon');
+    themeToggle.classList.add('dark-theme-icon');
+  }
+}
