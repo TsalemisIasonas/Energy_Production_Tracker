@@ -26,6 +26,7 @@ html,body {
 }
 
 .canvas-container {
+  margin-top: 500px;
   height: 100%;
   width: 100%;
   margin: auto;
@@ -52,9 +53,9 @@ canvas {
 }
 
 .light-theme-icon {
-  color: white;
+  color: black;
 }
 
 .dark-theme-icon {
-  color: black;
+  color: white;
 }
