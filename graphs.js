@@ -1,11 +1,19 @@
 fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data => {
-    const xAxis = [];
-    const yAxis = [];
-
-    for (let key in data) {
-      xAxis.push(key);
-      yAxis.push(data[key]);
+  const xAxis = [];
+  const yAxis = [];
+  
+  for (let key in data) {
+    xAxis.push(key);
+    let value = 0; // Reset value on each iteration
+    for (let i in data[key]){
+      value += Number(data[key][i]); // Fix typo and cast to number
     }
+    yAxis.push(value);
+  }
+  
+
+    console.log(xAxis);
+    console.log(yAxis);
 
     const ctx = document.getElementById('myChart');
     const myChart = new Chart(ctx, {
@@ -13,7 +21,7 @@ fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data 
       data: {
         labels: xAxis,
         datasets: [{
-          label: 'Energy Sources',
+          label: 'Renewable Energy Sources',
           data: yAxis,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
