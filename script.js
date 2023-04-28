@@ -24,7 +24,7 @@ window.onload = function () {
 
 // show footer if user scrolls under all elements
 window.addEventListener("scroll", function () {
-  if (window.pageYOffset > 700) {
+  if (window.pageYOffset > 500) {
     footer.classList.add('footer-visible');
     footer.classList.remove('footer-invisible');
   } else {
