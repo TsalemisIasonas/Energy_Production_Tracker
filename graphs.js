@@ -1,3 +1,12 @@
+const chartContainer = document.querySelector('.canvas-container');
+const animationContainer = document.getElementById('animation-container');
+const loader = document.querySelector('#loader');
+
+// Show animationContainer while data is being fetched
+animationContainer.style.display = 'block';
+loader.style.display = 'block';
+chartContainer.style.display = 'none';
+
 fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data => {
   const xAxis = [];
   const yAxis = [];
@@ -14,8 +23,13 @@ fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data 
   console.log(xAxis);
   console.log(yAxis);
 
-  const ctx = document.getElementById('myChart');
-  const myChart = new Chart(ctx, {
+  // Replace animationContainer with chart
+  animationContainer.style.display = 'none';
+  loader.style.display = 'none';
+  chartContainer.style.display = 'block';
+  const canvas = document.getElementById('myChart');
+  canvas.style.display = 'block';
+  const myChart = new Chart(canvas, {
     type: 'bar',
     data: {
       labels: xAxis,

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
+
 :root {
 
   --bg-color:#252525;
@@ -5,7 +7,7 @@
 }
 
 html,body {
-  font-family: Arial, sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--bg-color);
@@ -26,6 +28,64 @@ html,body {
   align-items: center;
   margin-bottom: 700px;
 }
+
+.loading-container {
+  position: fixed;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#loader {
+  font-size: 20px;
+  margin-bottom: 20%;
+}
+
+.animation-container {
+  border-radius: 50%;
+  background-color: red;
+  height: 100px;
+  width: 100px;
+  position: relative;
+}
+
+.animation-container::before,
+.animation-container::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  box-sizing: border-box;
+  border-radius: 50%;
+  animation: loader 1s ease-in-out infinite;
+}
+
+.animation-container::before {
+  animation-delay: -0.5s;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  50% {
+    transform: rotate(180deg);
+    box-shadow: inset -20px 0px 0px rgba(255, 255, 255, 0.4);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 
 .canvas-container {
   height: 100%;
