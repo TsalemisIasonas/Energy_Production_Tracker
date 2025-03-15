@@ -1,3 +1,2 @@
 ﻿# Energy_Production_Tracker
-Scraping the data of electric power production by various energy sources in Greece and presenting them.
-The scraper file gets the data from the entso-e website, the server file sends it to the frontend, the graphs file presents them in a graph and the script file handles the ux
+This repository contains a data scraper and visualization tool for electric power production in Greece. It collects data from the ENTSO-E website, processes it, and presents it through an interactive frontend with graphical representations.
